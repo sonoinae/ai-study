@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 스터디 모집 | 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0f0f0f;
+    --white: #f5f2eb;
+    --yellow: #FFD447;
+    --orange: #FF5C35;
+    --blue: #1B4FFF;
+    --blue-light: #E6ECFF;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Noto Sans KR', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 3rem;
+    background: rgba(15,15,15,0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.1em;
+    color: var(--yellow);
+  }
+  .nav-cta {
+    background: var(--yellow);
+    color: var(--black);
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 0.6rem 1.4rem;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: transform 0.15s, background 0.15s;
+  }
+  .nav-cta:hover { background: #ffe070; transform: scale(1.04); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 3rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(10rem, 25vw, 22rem);
+    color: rgba(255,255,255,0.03);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    letter-spacing: -0.02em;
+  }
+  .hero-tag {
+    display: inline-block;
+    background: var(--orange);
+    color: var(--white);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+    width: fit-content;
+  }
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 10vw, 9rem);
+    line-height: 0.93;
+    letter-spacing: -0.01em;
+    margin-bottom: 2rem;
+  }
+  .hero-title span { color: var(--yellow); }
+  .hero-desc {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: rgba(245,242,235,0.65);
+    max-width: 520px;
+    margin-bottom: 2.5rem;
+  }
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--yellow);
+    color: var(--black);
+    font-weight: 900;
+    font-size: 1rem;
+    padding: 1rem 2.2rem;
+    border-radius: 100px;
+    text-decoration: none;
+    width: fit-content;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .hero-cta:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(255,212,71,0.3); }
+  .hero-cta svg { width: 18px; height: 18px; }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2.5rem;
+    right: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.3);
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+
+  /* SECTIONS SHARED */
+  section { padding: 6rem 3rem; }
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--yellow);
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    line-height: 1;
+    letter-spacing: 0.01em;
+    margin-bottom: 2rem;
+  }
+
+  /* WHY */
+  .why {
+    background: var(--white);
+    color: var(--black);
+  }
+  .why .section-label { color: var(--orange); }
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(15,15,15,0.15);
+    border: 1px solid rgba(15,15,15,0.15);
+    margin-top: 3rem;
+  }
+  .why-card {
+    background: var(--white);
+    padding: 2.5rem;
+  }
+  .why-card:hover { background: #efecd8; }
+  .why-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 4rem;
+    color: var(--orange);
+    line-height: 1;
+    margin-bottom: 0.8rem;
+  }
+  .why-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+  }
+  .why-card p {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: rgba(15,15,15,0.6);
+  }
+
+  /* ROADMAP */
+  .roadmap { background: var(--black); }
+  .roadmap-row {
+    display: flex;
+    gap: 0;
+    margin-top: 3rem;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .roadmap-item {
+    flex: 1;
+    padding: 2.5rem;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    position: relative;
+    transition: background 0.2s;
+  }
+  .roadmap-item:last-child { border-right: none; }
+  .roadmap-item:hover { background: rgba(255,255,255,0.03); }
+  .roadmap-month {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 5rem;
+    line-height: 1;
+    margin-bottom: 1rem;
+    color: rgba(255,255,255,0.12);
+  }
+  .roadmap-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    padding: 0.35rem 0.9rem;
+    border-radius: 100px;
+    margin-bottom: 1rem;
+  }
+  .tag-yellow { background: var(--yellow); color: var(--black); }
+  .tag-orange { background: var(--orange); color: var(--white); }
+  .tag-blue { background: var(--blue); color: var(--white); }
+  .roadmap-item h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+  }
+  .roadmap-item ul {
+    list-style: none;
+    padding: 0;
+  }
+  .roadmap-item ul li {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.7;
+    padding-left: 1rem;
+    position: relative;
+  }
+  .roadmap-item ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: rgba(255,255,255,0.2);
+  }
+
+  /* HOW */
+  .how {
+    background: var(--blue);
+    color: var(--white);
+  }
+  .how .section-label { color: var(--yellow); }
+  .how-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  .how-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 4px;
+    padding: 2rem;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .how-card:hover { background: rgba(255,255,255,0.14); transform: translateY(-4px); }
+  .how-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--yellow);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.2rem;
+    font-size: 1.3rem;
+  }
+  .how-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.7rem;
+  }
+  .how-card p {
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.65);
+  }
+
+  /* APPLY */
+  .apply {
+    background: var(--yellow);
+    color: var(--black);
+    text-align: center;
+    padding: 7rem 3rem;
+  }
+  .apply .section-title { color: var(--black); }
+  .apply p {
+    font-size: 1.1rem;
+    color: rgba(15,15,15,0.6);
+    margin-bottom: 2.5rem;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .apply-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--black);
+    color: var(--yellow);
+    font-weight: 900;
+    font-size: 1.05rem;
+    padding: 1.1rem 2.6rem;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .apply-btn:hover { transform: translateY(-3px); box-shadow: 0 14px 35px rgba(15,15,15,0.25); }
+
+  /* FOOTER */
+  footer {
+    background: var(--black);
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.25);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp 0.7s ease forwards; }
+  .delay-1 { animation-delay: 0.1s; opacity: 0; }
+  .delay-2 { animation-delay: 0.25s; opacity: 0; }
+  .delay-3 { animation-delay: 0.4s; opacity: 0; }
+  .delay-4 { animation-delay: 0.55s; opacity: 0; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .hero { padding: 0 1.5rem 4rem; }
+    section { padding: 4rem 1.5rem; }
+    .why-grid { grid-template-columns: 1fr; }
+    .roadmap-row { flex-direction: column; }
+    .roadmap-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .how-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">AI STUDY 2026</div>
+  <a href="https://www.notion.so/nexoncompany/AI-343dadb56b2f8086b8cad01a9ad16d48" target="_blank" class="nav-cta">지원하기 →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-text">AI</div>
+  <div class="hero-tag fade-up">✦ 2026 STUDY RECRUIT</div>
+  <h1 class="hero-title fade-up delay-1">
+   똑같이 흘러가는 1주일<br><span>그 중 1시간을</span><br>조금 더 특별하게!
+  </h1>
+  <p class="hero-desc fade-up delay-2">
+    AI를 배우는 게 목표가 아닙니다.<br>
+    AI를 활용해서 더 많은 것을 만들어 보는 3개월입니다.
+  </p>
+  <a href="https://www.notion.so/nexoncompany/AI-343dadb56b2f8086b8cad01a9ad16d48" target="_blank" class="hero-cta fade-up delay-3">
+    지원서 작성하기
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+  </a>
+  <div class="hero-scroll">SCROLL</div>
+</section>
+
+<!-- WHY -->
+<section class="why">
+  <div class="section-label">/ 왜 지금인가</div>
+  <h2 class="section-title">AI 스터디<br>왜 해야하냐구요?</h2>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-num">01</div>
+      <h3>역할의 범위가 달라진다</h3>
+      <p>AI를 활용하는 사람은 혼자서 이미 더 많은 것들을 해내고 있어요.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-num">02</div>
+      <h3>배울수록 같이 성장한다</h3>
+      <p>혼자 익히는 것보다, 함께 배우고 사례를 공유하면 더 재밌고 빠르게 할 수 있죠.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-num">03</div>
+      <h3>기회는 바로 지금!</h3>
+      <p>거창한 준비는 ㄴㄴ 일단 뭐라도 시작해보자고요.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-num">04</div>
+      <h3>1주일에 1시간만!</h3>
+      <p>대단한 시간 내지 않아도 돼요. 주 1회, 1시간만 내도 앞으로의 10년이 달라질걸요? (조율가능)</p>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section class="roadmap">
+  <div class="section-label">/ 3개월 로드맵</div>
+  <h2 class="section-title">단계별로<br>올라갑니다.</h2>
+  <div class="roadmap-row">
+    <div class="roadmap-item">
+      <div class="roadmap-month">01</div>
+      <div class="roadmap-tag tag-yellow">탐색기</div>
+      <h3>일단 써보자🔥</h3>
+      <ul>
+        <li>프롬프트 기초 & 핸즈온</li>
+        <li>내 업무에서 AI 쓸 곳 찾기</li>
+        <li>1개월 회고</li>
+      </ul>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-month">02</div>
+      <div class="roadmap-tag tag-orange">심화기</div>
+      <h3>제대로 파보자 👩‍🏫</h3>
+      <ul>
+        <li>결과물은 같이 맛보고 함께 개선하기</li>
+        <li>직군에 따른 심화 미션 수행</li>
+        <li>실패 진심으로 대환영!</li>
+      </ul>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-month">03</div>
+      <div class="roadmap-tag tag-blue">결실기</div>
+      <h3>우리만의 자산을 만들자</h3>
+      <ul>
+        <li>IP사업팀 AI 플레이북 작성</li>
+        <li>Before vs After 비교</li>
+        <li>다음 시즌 계획</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="how">
+  <div class="section-label">/ 운영 방식</div>
+  <h2 class="section-title">이렇게<br>진행합니다.</h2>
+  <div class="how-grid">
+    <div class="how-card">
+      <div class="how-icon">📅</div>
+      <h3>주 1회 정기 모임</h3>
+      <p>매회 1시간으로 부담 없이, 꾸준하게 이어갑니다. (시간 조율 가능)</p>
+    </div>
+    <div class="how-card">
+      <div class="how-icon">🎤</div>
+      <h3>공유 및 토론</h3>
+      <p>실제 활용 사례를 공유하고, 더 나은 방법을 찾아봅니다.</p>
+    </div>
+    <div class="how-card">
+      <div class="how-icon">💬</div>
+      <h3>채널에서 수시 공유</h3>
+      <p>정기 모임에서 공유하긴 뭐하지만, 
+      알려주고 싶은 AI 소식은 언제든 알려주세요! TMI 대환영🙏</p>
+    </div>
+  </div>
+</section>
+
+<!-- APPLY -->
+<section class="apply">
+  <div class="section-label" style="color: rgba(15,15,15,0.4);">/ JOIN US</div>
+  <h2 class="section-title">같이 해봐요.</h2>
+  <p>자발적으로 해보고 싶은 분이라면 누구든 환영🎊<br>AI 경험이 전무해도 괜찮아요! </p>
+  <a href="https://www.notion.so/nexoncompany/AI-343dadb56b2f8086b8cad01a9ad16d48" target="_blank" class="apply-btn">
+    지원서 작성하러 가기 →
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>AI STUDY 2026</span>
+  <span>AI를 피할 수 없으면 즐긴다!</span>
+</footer>
+
+</body>
+</html>
